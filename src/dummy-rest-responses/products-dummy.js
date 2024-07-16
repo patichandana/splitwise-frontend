@@ -7,6 +7,8 @@ const products_dummy = {
             "type": "Home",
             "currency": "$",
             "balance": -18043.76,
+            "totalAmount": 250,
+            "createdAt": "Mar 20, 2024",
             "debts": [
                 {
                     "personId": 2,
@@ -26,6 +28,8 @@ const products_dummy = {
             "type": "Travel",
             "currency": "$",
             "balance": 3410.59,
+            "totalAmount": 20000,
+            "createdAt": "Mar 20, 2024",
             "debts": [
                 {
                     "personId": 3,

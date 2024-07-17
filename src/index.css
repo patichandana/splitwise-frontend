@@ -1,5 +1,4 @@
 html {
-  /* --box-border-radius: 25px; */
   background: linear-gradient(#ff724a, #ebbc5f);
   height: 100%;
   width: 100%;
@@ -17,36 +16,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-.gradiant_background {
-  background: linear-gradient(#ff724a, #ebbc5f);
-  height: 100vh;
-  width: 100vw;
-}
-
-.group {
-  background: white;
-  border-radius: var(--box-border-radius);
-  margin: 10px;
-}
-
-.group-container {
-  display: flex;
-  flex-direction: column;
-  background-color: grey;
-  margin: 20px;
-  border-radius: 10px;
-}
-
-.group-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-}
-
-.first {
-  display:flex;
-  justify-content: space-around;
-  padding: 10px;
 }

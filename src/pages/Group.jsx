@@ -16,15 +16,17 @@ const GroupContainer = styled("div")`
 const GroupDetails = styled("div")`
   display: flex;
   padding: 10px;
-  margin: 10px;
+  margin-top: 5px;
   justify-content: space-between;
   border-bottom: 0.5px ridge #d5d0d0;
   .group-details {
     display: flex;
+    flex-direction: column;
+    align-items: start;
     flex: 1;
   }
   .money {
-    font-weight: 500;
+    font-weight: 700;
     align-content: center;
   }
   .date {
@@ -43,16 +45,21 @@ const GroupAvatar = styled(Avatar)`
 const Balances = styled("div")`
   display: flex;
   flex-direction: column;
+  padding-top: 10px;
 `;
 
 const Debt = styled("div")`
   display: flex;
+  align-items: center;
   padding: 8px 10px;
 
   .debt-text {
-    font-size: 15px;
+    font-size: 13px;
     color: #7a7a7a;
-    // font-weight: 700;
+    font-weight: 600;
+  }
+
+  .debt-amount {
   }
 `;
 
@@ -61,9 +68,15 @@ const PersonBalance = styled("div")`
   padding: 10px;
   margin: 10px;
   border-radius: 30px;
-  background-color: ${(props) => (props.balanceAmount > 0 ? "#ceffd0" : (props.balanceAmount ==0) ? "#f5f1e8" : "#ffe1e1")};
+  background-color: ${(props) =>
+    props.balanceAmount > 0
+      ? "#ceffd0"
+      : props.balanceAmount == 0
+      ? "#f5f1e8"
+      : "#ffe1e1"};
   align-content: center;
-  justify-content: ${(props) => props.balanceAmount ==0 ? "center": "space-between"};
+  justify-content: ${(props) =>
+    props.balanceAmount == 0 ? "center" : "space-between"};
 
   .balance-text {
     margin-left: 10px;
@@ -72,15 +85,62 @@ const PersonBalance = styled("div")`
   }
 
   .balance-amount {
-    font-size: 18px;
-    color: ${(props) => (props.balanceAmount > 0 ? "#027927" : (props.balanceAmount ==0) ? "#f5f1e8" : "#b31c3a")};
+    font-size: 15px;
+    color: ${(props) =>
+      props.balanceAmount > 0
+        ? "#027927"
+        : props.balanceAmount == 0
+        ? "#f5f1e8"
+        : "#b31c3a"};
     font-weight: 700;
   }
-  `;
+`;
 
 /* Group class default export  */
-export default function Group({ debtsList, totalBalance, currency }) {
-  console.log(debtsList);
+export default function Group({ groupData, setPage, setParams }) {
+  console.log("chandana: ", groupData);
+
+  return (
+    <GroupContainer>
+      <GroupDetails>
+        <GroupAvatar width="30px" height="30px"></GroupAvatar>
+        <div className="group-details">
+          <Typography>{groupData.groupName}</Typography>
+          <Typography className="date">{groupData.createdAt}</Typography>
+        </div>
+        <Typography className="money">
+          {groupData.currency}
+          {groupData.totalAmount}
+        </Typography>
+      </GroupDetails>
+
+      <Balances>
+        {groupData.debts.map((debt) => {
+          return (
+            <Debt>
+              <GroupAvatar width="25px" height="25px"></GroupAvatar>
+              <Typography className="debt-text">
+                {debtText(debt.personName, debt.amount, groupData.currency)}
+              </Typography>
+            </Debt>
+          );
+        })}
+      </Balances>
+
+      <PersonBalance balanceAmount={groupData.totalBalance}>
+        <Typography className="balance-text">
+          {totalBalanceText(groupData.totalBalance)}
+        </Typography>
+        <Typography className="balance-amount">
+          {groupData.currency}
+          {Math.abs(groupData.totalBalance)}
+        </Typography>
+      </PersonBalance>
+    </GroupContainer>
+  );
+}
+
+function totalBalanceText(totalBalance) {
   let totalBalanceText;
 
   if (totalBalance == 0) {
@@ -91,44 +151,26 @@ export default function Group({ debtsList, totalBalance, currency }) {
     totalBalanceText = "You owe";
   }
 
-  return (
-    <GroupContainer>
-      <GroupDetails>
-        <GroupAvatar width="30px" height="30px"></GroupAvatar>
-        <div className="group-details">
-          <Typography>Birthday House</Typography>
-          <Typography className="date">Mar 24, 2023</Typography>
-        </div>
-        <Typography className="money">$4000</Typography>
-      </GroupDetails>
-
-      <Balances>
-        {debtsList.map((debt) => {
-          return (
-            <Debt>
-              <GroupAvatar width="25px" height="25px"></GroupAvatar>
-              {debt.amount > 0 ? (
-                <Typography className="debt-text">
-                  {debt.personName} owes you {debt.currency}
-                  {debt.amount}
-                </Typography>
-              ) : (
-                <Typography className="debt-text">
-                  you owe {debt.personName} {debt.currency}
-                  {debt.amount}
-                </Typography>
-              )}
-            </Debt>
-          );
-        })}
-      </Balances>
-
-      <PersonBalance balanceAmount={totalBalance}>
-        <Typography className="balance-text">{totalBalanceText}</Typography>
-        <Typography className="balance-amount">{currency}{totalBalance}</Typography>
-      </PersonBalance>
-    </GroupContainer>
-  );
+  return totalBalanceText;
 }
 
-function Debts({}) {}
+function debtText(debtee, debtAmount, currency) {
+  let debtText;
+
+  if (debtAmount > 0) {
+    debtText = (
+      <>
+        {debtee} owes you <b>{currency}{Math.abs(debtAmount)}</b>
+      </>
+    );
+  }
+  if (debtAmount < 0) {
+    debtText = (
+      <>
+        you owe {debtee} <b>{currency}{Math.abs(debtAmount)}</b>
+      </>
+    )
+   }
+
+  return debtText;
+}

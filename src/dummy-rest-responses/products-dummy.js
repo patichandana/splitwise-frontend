@@ -3,11 +3,11 @@ const products_dummy = {
     "data": [
         {
             "groupId": "1",
-            "group": "G2",
+            "groupName": "G2",
             "type": "Home",
             "currency": "$",
-            "balance": -18043.76,
-            "totalAmount": 250,
+            "totalAmount": 4000,
+            "totalBalance": 250,
             "createdAt": "Mar 20, 2024",
             "debts": [
                 {
@@ -24,17 +24,43 @@ const products_dummy = {
         },
         {
             "groupId": "2",
-            "group": "Kotagiri",
+            "groupName": "Kotagiri",
             "type": "Travel",
             "currency": "$",
-            "balance": 3410.59,
-            "totalAmount": 20000,
+            "totalBalance": 0,
+            "totalAmount": 1000,
             "createdAt": "Mar 20, 2024",
             "debts": [
                 {
                     "personId": 3,
                     "personName": "Nikhil R",
-                    "amount": 3410.59
+                    "amount": -50
+                },
+                {
+                    "personId": 4,
+                    "personName": "Kailov",
+                    "amount": 50
+                }
+            ]
+        },
+        {
+            "groupId": "3",
+            "groupName": "Mickey Birthday",
+            "type": "Birthday",
+            "currency": "$",
+            "totalBalance": -100,
+            "totalAmount": 200,
+            "createdAt": "Mar 20, 2024",
+            "debts": [
+                {
+                    "personId": 3,
+                    "personName": "Nikhil R",
+                    "amount": -50
+                },
+                {
+                    "personId": 4,
+                    "personName": "Kailov",
+                    "amount": -50
                 }
             ]
         }

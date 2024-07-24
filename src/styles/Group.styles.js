@@ -3,7 +3,7 @@ import { Avatar, Typography, Divider } from "@mui/material";
 
 
 /* custom styled components */
-const GroupContainer = styled("div")`
+export const GroupContainer = styled("div")`
   border-radius: 30px;
   background-color: white;
   margin: 15px;
@@ -13,7 +13,7 @@ const GroupContainer = styled("div")`
   }
 `;
 
-const GroupDetails = styled("div")`
+export const GroupDetails = styled("div")`
   display: flex;
   padding: 10px;
   margin-top: 5px;
@@ -36,19 +36,19 @@ const GroupDetails = styled("div")`
   }
 `;
 
-const GroupAvatar = styled(Avatar)`
+export const GroupAvatar = styled(Avatar)`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   margin-right: 10px;
 `;
 
-const Balances = styled("div")`
+export const Balances = styled("div")`
   display: flex;
   flex-direction: column;
   padding-top: 10px;
 `;
 
-const Debt = styled("div")`
+export const Debt = styled("div")`
   display: flex;
   align-items: center;
   padding: 8px 10px;
@@ -63,7 +63,7 @@ const Debt = styled("div")`
   }
 `;
 
-const PersonBalance = styled("div")`
+export const PersonBalance = styled("div")`
   display: flex;
   padding: 10px;
   margin: 10px;
@@ -95,13 +95,3 @@ const PersonBalance = styled("div")`
     font-weight: 700;
   }
 `;
-
-
-export {
-    GroupContainer,
-    GroupDetails,
-    GroupAvatar,
-    Balances,
-    Debt,
-    PersonBalance
- };
